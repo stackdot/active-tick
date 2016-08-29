@@ -1,0 +1,41 @@
+{
+  "name": "active-tick",
+  "version": "1.0.3",
+  "description": "ActiveTick Library",
+  "main": "app/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qrpike/active-tick.git"
+  },
+  "bugs": {
+    "url": "https://github.com/qrpike/active-tick/issues"
+  },
+  "homepage": "https://github.com/qrpike/active-tick#readme",
+  "author": "",
+  "license": "MIT",
+  "engineStrict": true,
+  "tags": [
+    "api",
+    "activetick",
+    "stackdot",
+    "active-tick",
+    "stocks",
+    "metrics",
+    "library"
+  ],
+  "engines": {
+    "node": ">6.0.0"
+  },
+  "dependencies": {
+    "async": "^2.0.1",
+    "colors": "^1.1.2",
+    "debug": "^2.2.0",
+    "lodash": "^4.15.0",
+    "moment": "^2.14.1",
+    "q": "^1.4.1",
+    "request": "^2.74.0"
+  }
+}
