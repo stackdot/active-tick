@@ -1,6 +1,6 @@
 [![Node Version](https://img.shields.io/node/v/active-tick.svg?maxAge=60)](https://www.npmjs.com/package/active-tick) [![NPM Version](https://img.shields.io/npm/v/active-tick.svg?maxAge=60)](https://www.npmjs.com/package/active-tick)  [![NPM License](https://img.shields.io/npm/l/active-tick.svg?maxAge=60)](https://www.npmjs.com/package/active-tick) 
 
-[![Build Status](https://drone.stackdot.com/api/badges/qrpike/active-tick/status.svg?maxAge=60)](https://drone.stackdot.com/qrpike/active-tick) [![dependencies Status](https://img.shields.io/david/qrpike/active-tick.svg?maxAge=60)](https://david-dm.org/qrpike/active-tick)
+[![Build Status](https://drone.stackdot.com/api/badges/stackdot/active-tick/status.svg?maxAge=60)](https://drone.stackdot.com/stackdot/active-tick) [![dependencies Status](https://img.shields.io/david/stackdot/active-tick.svg?maxAge=60)](https://david-dm.org/stackdot/active-tick)
 
 ActiveTick
 ===
