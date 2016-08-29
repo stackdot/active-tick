@@ -10,8 +10,11 @@ const lodash 	= require('lodash')
 const async 	= require('async')
 const moment 	= require('moment')
 const Q 		= require('q')
+const fs 		= require('fs')
 
 
+const AT_STR 	= 'YYYYMMDDHHmmss'
+const AT_STRL 	= 'YYYYMMDDHHmmssSSS'
 
 
 /**
@@ -28,11 +31,29 @@ class ActiveTick {
 	 */
 	constructor( params ){
 
+		debug('Instance Created:', params)
 		this.params = params
 		this.mapLimit = 1
 		this.API = params.API
+
+		// this.test()
+
 		return this
 
+	}
+
+	// Simple to make sure it's working properly:
+	test(){
+		const symb = 'NFLX'
+		this.tickData( symb, '8/25/2016' )
+			.then(( results ) => {
+				console.log('results', results)
+				fs.writeFileSync(`./${symb}.csv`, results)
+			})
+			.catch(( err ) => {
+				console.log('ERR', err)
+				next( err )
+			})
 	}
 
 
@@ -43,7 +64,7 @@ class ActiveTick {
 	 *  @return {String}      Formatted String of the date given.
 	 */
 	formatToAT( date ){
-		return date.format('YYYYMMDDHHmmSS')
+		return date.format(AT_STR)
 	}
 
 
@@ -74,8 +95,55 @@ class ActiveTick {
 			debug('Response Code:', res.statusCode)
 			if( err ) return cb( err )
 			if( res.statusCode != 200 ) return cb( new Error('Not a 200 status OK: '+res.statusCode ) )
-			cb( err, body )
+			cb( err, this.parseResponse( body ) )
 		})
+	}
+
+
+
+	/**
+	 *  Parse the CSV format into JS Array
+	 *  @param  {String} string CSV string ActiveTick API returns
+	 *  @return {Array}        Array of items parsed from string
+	 */
+	parseResponse( string ){
+		string = string.split('\r\n')
+		console.log('len', string.length)
+		return lodash.reject( string, ( str ) => lodash.isEmpty( str ) )
+	}
+
+
+
+	/**
+	 *  Parse a Tick Response
+	 *  @param  {String} str Line response from ActiveTick eg: Q,20160825093000577,0.730000,0.747000,47,35,P,Q,0
+	 *  @return {Object}     Object of tick data from str
+	 */
+	parseTick( str ){
+		const pieces = str.split( ',' )
+		let res = {}
+		res.type = pieces[0]
+		res.time = moment(pieces[1], AT_STRL).valueOf()
+		if( pieces[0] == 'T' ){
+			res.type		= 'trade'
+			res.lastprice 	= parseFloat( pieces[2] )
+			res.lastsize 	= parseFloat( pieces[3] )
+			res.lastexch 	= pieces[4]
+			res.c1 			= parseInt( pieces[5] || '0' )
+			res.c2 			= parseInt( pieces[6] || '0' )
+			res.c3 			= parseInt( pieces[7] || '0' )
+			res.c4 			= parseInt( pieces[8] || '0' )
+		}else {
+			res.type		= 'quote'
+			res.bidprice 	= parseFloat( pieces[2] )
+			res.askprice 	= parseFloat( pieces[3] )
+			res.bidsize 	= parseFloat( pieces[4] )
+			res.asksize 	= parseFloat( pieces[5] )
+			res.bidexch 	= pieces[6] || ''
+			res.askexch 	= pieces[7] || ''
+			res.c1 			= parseInt( pieces[8] || '0' )
+		}
+		return res
 	}
 
 
@@ -89,17 +157,14 @@ class ActiveTick {
 	tickData( symbol, day ){
 
 		const deferred = Q.defer()
-
 		debug('tick data', symbol, day)
 		day = moment( new Date( day ) )
 		debug('D', this.formatToAT( day ))
-
 
 		// Set our date to 9:30am:
 		day.hour( 9 )
 		day.minute( 30 )
 		day.seconds( 0 )
-
 
 		// Divide day into 10min intervals:
 		let callStack = []
@@ -116,15 +181,16 @@ class ActiveTick {
 			callStack.push( params )
 		}
 
-
 		// Execute entire day:
-		async.mapLimit( callStack, this.mapLimit, this.exeStack.bind( this ), deferred.makeNodeResolver())
-
+		async.mapLimit( callStack, this.mapLimit, this.exeStack.bind( this ), ( err, res ) => {
+			deferred.makeNodeResolver()( err, lodash.flatten( res ) )
+		})
 
 		// Return promise
 		return deferred.promise
 
 	}
+
 
 
 }

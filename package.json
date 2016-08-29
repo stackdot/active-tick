@@ -1,6 +1,6 @@
 {
   "name": "active-tick",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "ActiveTick Library",
   "main": "app/index.js",
   "scripts": {
