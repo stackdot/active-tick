@@ -13,8 +13,9 @@ const Q 		= require('q')
 const fs 		= require('fs')
 
 
-const AT_STR 	= 'YYYYMMDDHHmmss'
-const AT_STRL 	= 'YYYYMMDDHHmmssSSS'
+const AT_STR 		= 'YYYYMMDDHHmmss'
+const AT_STRL 		= 'YYYYMMDDHHmmssSSS'
+const MAP_LIMIT		= 2
 
 
 /**
@@ -33,7 +34,7 @@ class ActiveTick {
 
 		debug('Instance Created:', params)
 		this.params = params
-		this.mapLimit = 1
+		this.mapLimit = params.mapLimit || MAP_LIMIT
 		this.API = params.API
 
 		// this.test()
@@ -95,6 +96,7 @@ class ActiveTick {
 			debug('Response Code:', res.statusCode)
 			if( err ) return cb( err )
 			if( res.statusCode != 200 ) return cb( new Error('Not a 200 status OK: '+res.statusCode ) )
+			if( body == '0' ) return cb( err, [] )
 			cb( err, this.parseResponse( body ) )
 		})
 	}
