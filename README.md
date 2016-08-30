@@ -1,6 +1,6 @@
 [![Node Version](https://img.shields.io/node/v/active-tick.svg?maxAge=60)](https://www.npmjs.com/package/active-tick) [![NPM Version](https://img.shields.io/npm/v/active-tick.svg?maxAge=60)](https://www.npmjs.com/package/active-tick)  [![NPM License](https://img.shields.io/npm/l/active-tick.svg?maxAge=60)](https://www.npmjs.com/package/active-tick) 
 
-[![Build Status](https://drone.stackdot.com/api/badges/stackdot/active-tick/status.svg?maxAge=60)](https://drone.stackdot.com/stackdot/active-tick) [![dependencies Status](https://img.shields.io/david/stackdot/active-tick.svg?maxAge=60)](https://david-dm.org/stackdot/active-tick)
+[![Build Status](https://drone.stackdot.com/api/badges/stackdot/active-tick/status.svg?maxAge=60)](https://drone.stackdot.com/stackdot/active-tick) [![dependencies Status](https://img.shields.io/david/stackdot/active-tick.svg?maxAge=60)](https://david-dm.org/stackdot/active-tick) [![Coverage Status](https://coveralls.io/repos/github/stackdot/active-tick/badge.svg?branch=master)](https://coveralls.io/github/stackdot/active-tick?branch=master)
 
 
 <p align="center"><img src="assets/logo.png" /></p>
