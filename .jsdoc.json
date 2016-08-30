@@ -1,6 +1,6 @@
 {
 	"source": {
-		"include": ["app/"]
+		"include": ["app/", "README.md"]
 	},
 	"opts": {
 		"template": "node_modules/minami",
