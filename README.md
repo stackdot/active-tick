@@ -2,6 +2,10 @@
 
 [![Build Status](https://drone.stackdot.com/api/badges/stackdot/active-tick/status.svg?maxAge=60)](https://drone.stackdot.com/stackdot/active-tick) [![dependencies Status](https://img.shields.io/david/stackdot/active-tick.svg?maxAge=60)](https://david-dm.org/stackdot/active-tick)
 
+
+<p align="center"><img src="assets/logo.png" /></p>
+
+
 ActiveTick
 ===
 
