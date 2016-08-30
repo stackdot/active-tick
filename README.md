@@ -46,7 +46,7 @@ ActiveTick.tickData( 'TSLA', '8/25/2016' )
 
 ```
 
-
+[JSDocs Documentation](https://stackdot.github.io/active-tick/ActiveTick.html)
 
 Enabling the Debugger
 ---
