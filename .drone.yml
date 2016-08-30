@@ -3,9 +3,12 @@ build:
   compile:
     image: node:6.3.1
     pull: true
+    environment:
+      - COVERALLS_REPO_TOKEN=$$COVERALLS_TOKEN
+      - COVERALLS_SERVICE_NAME=stackdot/active-tick
     commands:
       - npm update
-#      - npm test
+      - npm test
 
 
 publish:
